@@ -39,13 +39,18 @@ def extract_amazon_product_data(html):
         productDescription = ""
     featureBullets = soup.find("div", id="feature-bullets").text
 
+    metadata_items = find_product_table_data(html)
+    element_with_attribute = soup.find(lambda tag: tag.has_attr("data-asin"))
+    if element_with_attribute:
+        data_asin = element_with_attribute["data-asin"]
     return {
+        "asin": data_asin,
         "title": productTitleText,
         "price_raw": productPrice,
         "price_text": productPriceText,
         "price": productPriceNum,
-        "metadata": find_product_table_data(html),
+        "metadata": metadata_items,
         "description": productDescription,
-        "feature_bullets": featureBullets,
         "ratings": find_product_rating(html),
+        "feature_bullets": featureBullets,
     }
