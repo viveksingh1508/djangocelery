@@ -4,3 +4,6 @@ django-celery-beat
 django-celery-results
 python-decouple
 redis
+jupyter
+selenium
+beautifulsoup4
